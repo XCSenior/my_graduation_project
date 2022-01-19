@@ -21,8 +21,12 @@ export default {
 	name:"ShoppingMall",
 	data() {
 		return {
-			msg:"ShoppingMall",
-			locationIcon:require("../../assets/images/location.png")
+			locationIcon:require("../../assets/images/location.png"),
+			bannerPicArray:[
+                {imageUrl:'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic001.jpg'},
+                {imageUrl:'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic002.jpg'},
+                {imageUrl:'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic003.jpg'},
+            ]
 		}
 	},
 }
