@@ -25,6 +25,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
 	name:"ShoppingMall",
 	data() {
@@ -36,6 +37,17 @@ export default {
 				{imageUrl:require("../../assets/images/simleVueDemoPic003.jpg")}
 			]
 		}
+	},
+	created() {
+		/* 获取首页JSON数据 */
+		axios({
+			url:"http://127.0.0.1:4000/index",
+			method:"get"
+		}).then((response) => {
+			console.log(response.data);
+		}).catch((error) => {
+			console.log(error);
+		});
 	},
 }
 </script>
