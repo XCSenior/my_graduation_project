@@ -13,6 +13,14 @@
 				</van-col>
 			</van-row>
 		</div>
+		<!-- 轮播图swiper area-->
+		<div class="swiper-area">
+			<van-swipe :autoplay="1000">
+				<van-swipe-item v-for="(banner,index) in bannerPicArray" :key="index">
+					<a href="#"><img v-lazy="banner.imageUrl" width="100%" alt="banner"></a>
+				</van-swipe-item>
+			</van-swipe>
+		</div>
 	</div>
 </template>
 
@@ -23,10 +31,10 @@ export default {
 		return {
 			locationIcon:require("../../assets/images/location.png"),
 			bannerPicArray:[
-                {imageUrl:'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic001.jpg'},
-                {imageUrl:'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic002.jpg'},
-                {imageUrl:'http://7xjyw1.com1.z0.glb.clouddn.com/simleVueDemoPic003.jpg'},
-            ]
+				{imageUrl:require("../../assets/images/simleVueDemoPic001.jpg")},
+				{imageUrl:require("../../assets/images/simleVueDemoPic002.jpg")},
+				{imageUrl:require("../../assets/images/simleVueDemoPic003.jpg")}
+			]
 		}
 	},
 }
@@ -37,6 +45,7 @@ export default {
 		height: 2.5rem;
 		background-color: #e5017b;
 		line-height: 2.5rem;	/* 文字上下居中 */
+		overflow: hidden;		/* 溢出部分隐藏 */
 	}
 	.search-input{
 		width: 100%;
@@ -51,6 +60,11 @@ export default {
 		padding-left: 0.3rem;
 	}
 	.search-button{
-		padding-left: 0.5rem;
+		padding-left: 0.75rem;
+	}
+	.swiper-area{
+		clear: both;	/* 清除浮动 */
+		max-height: 17.5rem;	/* 设置最大高度，不让低网速时未知图片高度，组件溢出 */
+		overflow: hidden;	/* 组件溢出隐藏 */
 	}
 </style>
