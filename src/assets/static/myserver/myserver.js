@@ -14,6 +14,7 @@ fs.readFile(indexDataPath,(err , data) => {
 /* 创建后端express框架应用 */
 const express = require("express")
 const app = new express()
+let count = 0;
 
 app.get("/index",(request,response)=>{
 	/* 设置跨域请求,脚手架默认localhost8080端口,服务器是127.0.0.1:4000/index */
@@ -22,7 +23,8 @@ app.get("/index",(request,response)=>{
 	response.setHeader("Access-Control-Allow-Method","*");
 
 	response.send(indexJSONData);
-	console.log("请求了首页JSON数据");
+	console.log(`第${count+1}次请求了首页JSON数据`);
+	++count;
 });
 
 app.listen(4000,() => {
