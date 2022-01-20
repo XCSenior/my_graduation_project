@@ -1,11 +1,12 @@
 import Vue from 'vue'
 import App from './App.vue'
-import {Button,Row,Col,Swipe,SwipeItem} from 'vant';
+import {Button,Row,Col,Swipe,SwipeItem,Lazyload} from 'vant';
 /* 引入写好的路由器 */
 import router from './router/index';
 
 Vue.config.productionTip = false
-Vue.use(Button).use(Row).use(Col).use(Swipe).use(SwipeItem)
+Vue.use(Button).use(Row).use(Col).use(Swipe).use(SwipeItem).use(Lazyload)
+
 
 
 new Vue({
@@ -14,3 +15,4 @@ new Vue({
 	components:{App}
 }).$mount('#app')
 
+console.log("😂main.js");
