@@ -1,6 +1,6 @@
 /* 获取indexData */
 const path = require("path")
-const indexDataPath = path.resolve("E:/MyCoding/my_graduation_project/src/assets/static/myserver/index.json");
+const indexDataPath = path.resolve("./src/assets/static/myserver/index.json");
 let indexJSONData = null
 const fs = require('fs');
 fs.readFile(indexDataPath,(err , data) => {
