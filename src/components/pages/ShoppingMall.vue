@@ -21,6 +21,14 @@
 				</van-swipe-item>
 			</van-swipe>
 		</div>
+		<!-- 商品类别type-bar -->
+		<div class="type-bar">
+			<div v-for="(cate,index) in category" :key="cate.mallCategoryId">
+				<!-- lazy懒加载 -->
+				<img v-lazy="cate.image" width="90%">
+				<span>{{cate.mallCategoryName}}</span>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -35,7 +43,8 @@ export default {
 				{imageUrl:require("../../assets/images/simleVueDemoPic001.jpg")},
 				{imageUrl:require("../../assets/images/simleVueDemoPic002.jpg")},
 				{imageUrl:require("../../assets/images/simleVueDemoPic003.jpg")}
-			]
+			],
+			category:[]
 		}
 	},
 	created() {
@@ -44,7 +53,16 @@ export default {
 			url:"http://127.0.0.1:4000/index",
 			method:"get"
 		}).then((response) => {
-			console.log(response.data);
+			console.log(response.data);			/* 打印data */
+			/* 如果请求成功 */
+			if(response.status === 200){
+				this.category = response.data.data.category;
+				/* 由于type-bar图片第一张大小不同,所以下载至本地。现在遍历改成本地路径 */
+				this.category.forEach( (cate,index)=>{
+					cate.image = require(`../../assets/images/type-bar/${index+1}.png`)
+				});
+				// console.log(this.category);
+			}
 		}).catch((error) => {
 			console.log(error);
 		});
@@ -78,5 +96,19 @@ export default {
 		clear: both;	/* 清除浮动 */
 		max-height: 17.5rem;	/* 设置最大高度，不让低网速时未知图片高度，组件溢出 */
 		overflow: hidden;	/* 组件溢出隐藏 */
+	}
+	.type-bar{
+		background-color: #ffffff;
+		margin: 0 0.3rem 0.3rem 0.3rem;
+		border-radius: 0.3rem;
+		font-size: 12px;
+		display: flex;
+		flex-direction: row;	/* 一行排列不换行 */
+		flex-wrap: nowrap;
+	}
+	.type-bar div{
+		padding: 0.3rem;
+		font-size: 12px;
+		text-align: center;
 	}
 </style>
