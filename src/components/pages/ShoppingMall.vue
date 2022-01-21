@@ -45,7 +45,7 @@
 					<div class="recommend-item">
 						<img :src.lazy="item.image" width="80%">
 						<div>{{item.goodsName}}</div>
-						<div>￥{{item.price}}(￥{{item.mallPrice}})</div>
+						<div>￥{{item.price | moneyFilter}}(￥{{item.mallPrice | moneyFilter}})</div>
 					</div>
 				</swiper-Slide>
 			</swiper>
@@ -65,10 +65,16 @@
 import axios from 'axios';
 import 'swiper/dist/css/swiper.css';
 import {swiper,swiperSlide} from 'vue-awesome-swiper';
+import {toMoney} from '../../filters/moneyFilter.js';
 import FloorComponent from '../component/floorComponent.vue';
 export default {
 	name:"ShoppingMall",
 	components:{swiper,swiperSlide,FloorComponent},
+	filters:{
+		moneyFilter(money){
+			return toMoney(money);
+		}
+	},
 	data() {
 		return {
 			locationIcon:require("../../assets/images/location.png"),
