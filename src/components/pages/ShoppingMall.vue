@@ -33,19 +33,43 @@
 		<div class="adBanner-area">
 			<img v-lazy="adBanner" alt="广告banner.gif" width="100%">
 		</div>
+		<!-- 商品推荐 recommend goods area -->
+		<div class="recommend-area">
+			<div class="recommend-title">
+				商品推荐
+			</div>
+			<div class="recommend-body">
+				<swiper :options="swiperOption">
+					<swiper-Slide v-for="(item,index) in recommendGoods" :key="item.goodsId">
+						<div class="recommend-item">
+							<img :src.lazy="item.image" width="80%">
+							<div>{{item.goodsName}}</div>
+							<div>￥{{item.price}}(￥{{item.mallPrice}})</div>
+						</div>
+					</swiper-Slide>
+				</swiper>
+			</div>
+		</div>
 	</div>
 </template>
 
 <script>
 import axios from 'axios';
+import 'swiper/dist/css/swiper.css';
+import {swiper,swiperSlide} from 'vue-awesome-swiper';
 export default {
 	name:"ShoppingMall",
+	components:{swiper,swiperSlide},
 	data() {
 		return {
 			locationIcon:require("../../assets/images/location.png"),
 			bannerPicArray:[],
 			category:[],
-			adBanner:""
+			adBanner:"",
+			recommendGoods:[],
+			swiperOption:{
+				slidesPerView:3
+			}
 		}
 	},
 	created() {
@@ -69,6 +93,8 @@ export default {
 				this.adBanner = response.data.data.advertesPicture.PICTURE_ADDRESS;
 				/* 3、获取轮播图的image */
 				this.bannerPicArray = response.data.data.slides;
+				/* 4、获取商品推荐数据 */
+				this.recommendGoods = response.data.data.recommend
 			}
 		}).catch((error) => {
 			console.log(error);
@@ -108,14 +134,34 @@ export default {
 		background-color: #ffffff;
 		margin: 0 0.3rem 0.3rem 0.3rem;
 		border-radius: 0.3rem;
-		font-size: 12px;
+		font-size: 0.875rem;
 		display: flex;
 		flex-direction: row;	/* 一行排列不换行 */
 		flex-wrap: nowrap;
 	}
 	.type-bar div{
 		padding: 0.3rem;
-		font-size: 12px;
+		font-size: 0.75rem;
+		text-align: center;
+	}
+	.recommend-area{
+		background-color: #ffffff;
+		margin-top: 0.3rem;
+
+	}
+	.recommend-title{
+		color: #e5017b;
+		font-size: 0.875rem;
+		border-bottom: 1px solid #eeeeee;
+		padding: 0.2rem;
+	}
+	.recommend-body{
+		border-bottom: 0.0625rem solid #ececec;
+	}
+	.recommend-item{
+		width: 99%;
+		font-size: 0.75rem;
+		border-right: 0.0625rem solid #ececec;
 		text-align: center;
 	}
 </style>
