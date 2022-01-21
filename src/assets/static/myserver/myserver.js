@@ -1,6 +1,7 @@
 /* 获取indexData */
 const path = require("path")
-const indexDataPath = path.resolve("./src/assets/static/myserver/index.json");
+const indexDataPath = path.resolve("./index.json");		/* 修改为相对路径 */
+console.log(indexDataPath);		/* 输出indexDataPath */
 let indexJSONData = null
 const fs = require('fs');
 fs.readFile(indexDataPath,(err , data) => {
