@@ -50,27 +50,8 @@
 				</swiper-Slide>
 			</swiper>
 		</div>
-		<!-- 楼层数据 -->
-		<div class="floor">
-			<div class="floor-anomaly">		<!-- 不规则的楼层 -->
-				<div class="floor-one">
-					<img :src.lazy="floor1_0.image" width="100%">
-				</div>
-				<div>
-					<div class="floor-two">
-						<img :src.lazy="floor1_1.image" width="100%">
-					</div>
-					<div class="floor-three">
-						<img :src.lazy="floor1_2.image" width="100%">
-					</div>
-				</div>
-			</div>
-			<div class="floor-rule">
-				<div v-for="(item,index) in floor1.slice(3)" :key="item.goodsId">
-					<img :src.lazy="item.image" width="100%">
-				</div>
-			</div>
-		</div>
+		<!-- 楼层1数据 -->
+		<FloorComponent :floorData="floor1"></FloorComponent>
 	</div>
 
 </div>
@@ -80,9 +61,10 @@
 import axios from 'axios';
 import 'swiper/dist/css/swiper.css';
 import {swiper,swiperSlide} from 'vue-awesome-swiper';
+import FloorComponent from '../component/floorComponent.vue';
 export default {
 	name:"ShoppingMall",
-	components:{swiper,swiperSlide},
+	components:{swiper,swiperSlide,FloorComponent},
 	data() {
 		return {
 			locationIcon:require("../../assets/images/location.png"),
@@ -91,9 +73,6 @@ export default {
 			adBanner:"",
 			recommendGoods:[],
 			floor1:[],		/* 获得楼层数据 */
-			floor1_0:{},
-			floor1_1:{},
-			floor1_2:{},
 			swiperOption:{
 				slidesPerView:3
 			}
@@ -124,9 +103,6 @@ export default {
 				this.recommendGoods = response.data.data.recommend;
 				/* 5、获得楼层数据 */
 				this.floor1 = response.data.data.floor1;
-				this.floor1_0 = response.data.data.floor1[0];
-				this.floor1_1 = response.data.data.floor1[1];
-				this.floor1_2 = response.data.data.floor1[2];
 			}
 		}).catch((error) => {
 			console.log(error);
@@ -196,36 +172,5 @@ export default {
 		border-right: 0.0625rem solid #ececec;
 		text-align: center;
 	}
-	.floor-anomaly{
-		display: flex;
-		flex-direction: row;
-		background-color: #ffffff;
-		border-bottom: 0.0625rem solid #cccccc;
-	}
-	.floor-anomaly div{
-		width: 10rem;
-		box-sizing: border-box;
-		-webkit-box-sizing: border-box;
-	}
-	.floor-one{
-		border-right: .0625rem solid #cccccc;
-	}
-	.floor-two{
-		border-bottom: .0625rem solid #cccccc;
-	}
-	.floor-rule{
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-		background-color: #ffffff;
-	}
-	.floor-rule div{
-		box-sizing: border-box;
-		-webkit-box-sizing: border-box;
-		width: 10rem;
-		border-bottom: 0.0625rem solid #cccccc;
-	}
-	.floor-rule div:nth-child(odd){
-		border-right: 0.0625rem solid #cccccc;
-	}
+
 </style>
