@@ -4,20 +4,20 @@
 		<div class="floor-title">{{floorTitle}}</div>
 		<div class="floor-anomaly">		<!-- 不规则的楼层 -->
 			<div class="floor-one">
-				<img :src.lazy="floorData0.image" width="100%">
+				<a href="javascript:;"><img :src.lazy="floorData0.image" width="100%"></a>
 			</div>
 			<div>
 				<div class="floor-two">
-					<img :src.lazy="floorData1.image" width="100%">
+					<a href="javascript:;"><img :src.lazy="floorData1.image" width="100%"></a>
 				</div>
 				<div class="floor-three">
-					<img :src.lazy="floorData2.image" width="100%">
+					<a href="javascript:;"><img :src.lazy="floorData2.image" width="100%"></a>
 				</div>
 			</div>
 		</div>
 		<div class="floor-rule">
 			<div v-for="(item,index) in floorData.slice(3)" :key="item.goodsId">
-				<img :src.lazy="item.image" width="100%">
+				<a href="javascript:;"><img :src.lazy="item.image" width="100%"></a>
 			</div>
 		</div>
 	</div>
