@@ -43,9 +43,11 @@
 			<swiper :options="swiperOption">
 				<swiper-Slide v-for="(item,index) in recommendGoods" :key="item.goodsId">
 					<div class="recommend-item">
-						<img :src.lazy="item.image" width="80%">
-						<div>{{item.goodsName}}</div>
-						<div>￥{{item.price | moneyFilter}}(￥{{item.mallPrice | moneyFilter}})</div>
+						<a href="javascript:;">
+							<img :src.lazy="item.image" width="80%">
+							<div>{{item.goodsName}}</div>
+							<div>￥{{item.price | moneyFilter}}(￥{{item.mallPrice | moneyFilter}})</div>
+						</a>
 					</div>
 				</swiper-Slide>
 			</swiper>
@@ -189,5 +191,11 @@ export default {
 		border-right: 0.0625rem solid #ececec;
 		text-align: center;
 	}
-
+	.recommend-item a{
+		text-decoration: none;
+		color: #888888;
+	}
+	.recommend-item a:active{
+		color: #686868;
+	}
 </style>
