@@ -1,56 +1,79 @@
 <template>
-	<div>
-		<div class="search-bar">
-			<van-row>
-				<van-col span="3">
-					<img :src="locationIcon" width="80%" alt="定位.png" class="location-icon">
-				</van-col>
-				<van-col span="16">
-					<input type="text" class="search-input">
-				</van-col>
-				<van-col span="5" class="search-button">
-					<van-button size="mini">查找</van-button>
-				</van-col>
-			</van-row>
+<div>
+	<!-- 头部区域 -->
+	<div class="search-bar">
+		<van-row>
+			<van-col span="3">
+				<img :src="locationIcon" width="80%" alt="定位.png" class="location-icon">
+			</van-col>
+			<van-col span="16">
+				<input type="text" class="search-input">
+			</van-col>
+			<van-col span="5" class="search-button">
+				<van-button size="mini">查找</van-button>
+			</van-col>
+		</van-row>
+	</div>
+	<!-- 轮播图swiper area-->
+	<div class="swiper-area">
+		<van-swipe :autoplay="2000">
+			<van-swipe-item v-for="(banner,index) in bannerPicArray" :key="index">
+				<a href="#"><img v-lazy="banner.image" width="100%" alt="banner"></a>
+			</van-swipe-item>
+		</van-swipe>
+	</div>
+	<!-- 商品类别type-bar -->
+	<div class="type-bar">
+		<div v-for="(cate,index) in category" :key="cate.mallCategoryId">
+			<!-- lazy懒加载 -->
+			<img v-lazy="cate.image" width="90%">
+			<span>{{cate.mallCategoryName}}</span>
 		</div>
-		<!-- 轮播图swiper area-->
-		<div class="swiper-area">
-			<van-swipe :autoplay="2000">
-				<van-swipe-item v-for="(banner,index) in bannerPicArray" :key="index">
-					<a href="#"><img v-lazy="banner.image" width="100%" alt="banner"></a>
-				</van-swipe-item>
-			</van-swipe>
+	</div>
+	<!-- 广告条adBanner -->
+	<div class="adBanner-area">
+		<img v-lazy="adBanner" alt="广告banner.gif" width="100%">
+	</div>
+	<!-- 商品推荐 recommend goods area -->
+	<div class="recommend-area">
+		<div class="recommend-title">
+			商品推荐
 		</div>
-		<!-- 商品类别type-bar -->
-		<div class="type-bar">
-			<div v-for="(cate,index) in category" :key="cate.mallCategoryId">
-				<!-- lazy懒加载 -->
-				<img v-lazy="cate.image" width="90%">
-				<span>{{cate.mallCategoryName}}</span>
+		<div class="recommend-body">
+			<swiper :options="swiperOption">
+				<swiper-Slide v-for="(item,index) in recommendGoods" :key="item.goodsId">
+					<div class="recommend-item">
+						<img :src.lazy="item.image" width="80%">
+						<div>{{item.goodsName}}</div>
+						<div>￥{{item.price}}(￥{{item.mallPrice}})</div>
+					</div>
+				</swiper-Slide>
+			</swiper>
+		</div>
+		<!-- 楼层数据 -->
+		<div class="floor">
+			<div class="floor-anomaly">		<!-- 不规则的楼层 -->
+				<div class="floor-one">
+					<img :src.lazy="floor1_0.image" width="100%">
+				</div>
+				<div>
+					<div class="floor-two">
+						<img :src.lazy="floor1_1.image" width="100%">
+					</div>
+					<div class="floor-three">
+						<img :src.lazy="floor1_2.image" width="100%">
+					</div>
+				</div>
 			</div>
-		</div>
-		<!-- 广告条adBanner -->
-		<div class="adBanner-area">
-			<img v-lazy="adBanner" alt="广告banner.gif" width="100%">
-		</div>
-		<!-- 商品推荐 recommend goods area -->
-		<div class="recommend-area">
-			<div class="recommend-title">
-				商品推荐
-			</div>
-			<div class="recommend-body">
-				<swiper :options="swiperOption">
-					<swiper-Slide v-for="(item,index) in recommendGoods" :key="item.goodsId">
-						<div class="recommend-item">
-							<img :src.lazy="item.image" width="80%">
-							<div>{{item.goodsName}}</div>
-							<div>￥{{item.price}}(￥{{item.mallPrice}})</div>
-						</div>
-					</swiper-Slide>
-				</swiper>
+			<div class="floor-rule">
+				<div v-for="(item,index) in floor1.slice(3)" :key="item.goodsId">
+					<img :src.lazy="item.image" width="100%">
+				</div>
 			</div>
 		</div>
 	</div>
+
+</div>
 </template>
 
 <script>
@@ -67,6 +90,10 @@ export default {
 			category:[],
 			adBanner:"",
 			recommendGoods:[],
+			floor1:[],		/* 获得楼层数据 */
+			floor1_0:{},
+			floor1_1:{},
+			floor1_2:{},
 			swiperOption:{
 				slidesPerView:3
 			}
@@ -94,7 +121,12 @@ export default {
 				/* 3、获取轮播图的image */
 				this.bannerPicArray = response.data.data.slides;
 				/* 4、获取商品推荐数据 */
-				this.recommendGoods = response.data.data.recommend
+				this.recommendGoods = response.data.data.recommend;
+				/* 5、获得楼层数据 */
+				this.floor1 = response.data.data.floor1;
+				this.floor1_0 = response.data.data.floor1[0];
+				this.floor1_1 = response.data.data.floor1[1];
+				this.floor1_2 = response.data.data.floor1[2];
 			}
 		}).catch((error) => {
 			console.log(error);
@@ -163,5 +195,37 @@ export default {
 		font-size: 0.75rem;
 		border-right: 0.0625rem solid #ececec;
 		text-align: center;
+	}
+	.floor-anomaly{
+		display: flex;
+		flex-direction: row;
+		background-color: #ffffff;
+		border-bottom: 0.0625rem solid #cccccc;
+	}
+	.floor-anomaly div{
+		width: 10rem;
+		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+	}
+	.floor-one{
+		border-right: .0625rem solid #cccccc;
+	}
+	.floor-two{
+		border-bottom: .0625rem solid #cccccc;
+	}
+	.floor-rule{
+		display: flex;
+		flex-direction: row;
+		flex-wrap: wrap;
+		background-color: #ffffff;
+	}
+	.floor-rule div{
+		box-sizing: border-box;
+		-webkit-box-sizing: border-box;
+		width: 10rem;
+		border-bottom: 0.0625rem solid #cccccc;
+	}
+	.floor-rule div:nth-child(odd){
+		border-right: 0.0625rem solid #cccccc;
 	}
 </style>
