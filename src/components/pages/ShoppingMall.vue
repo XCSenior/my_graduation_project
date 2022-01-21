@@ -52,6 +52,10 @@
 		</div>
 		<!-- 楼层1数据 -->
 		<FloorComponent :floorData="floor1" :floorTitle="floorName.floor1"></FloorComponent>
+		<!-- 楼层2数据 -->
+		<FloorComponent :floorData="floor2" :floorTitle="floorName.floor2"></FloorComponent>
+		<!-- 楼层3数据 -->
+		<FloorComponent :floorData="floor3" :floorTitle="floorName.floor3"></FloorComponent>
 	</div>
 
 </div>
@@ -73,6 +77,8 @@ export default {
 			adBanner:"",
 			recommendGoods:[],
 			floor1:[],		/* 获得楼层数据 */
+			floor2:[],
+			floor3:[],
 			floorName:{},
 			swiperOption:{
 				slidesPerView:3
@@ -104,6 +110,8 @@ export default {
 				this.recommendGoods = response.data.data.recommend;
 				/* 5、获得楼层数据 */
 				this.floor1 = response.data.data.floor1;
+				this.floor2 = response.data.data.floor2;
+				this.floor3 = response.data.data.floor3;
 				/* 6、获得floorName */
 				this.floorName = response.data.data.floorName;
 			}
