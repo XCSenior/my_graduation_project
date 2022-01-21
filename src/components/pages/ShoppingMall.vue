@@ -51,7 +51,7 @@
 			</swiper>
 		</div>
 		<!-- 楼层1数据 -->
-		<FloorComponent :floorData="floor1"></FloorComponent>
+		<FloorComponent :floorData="floor1" :floorTitle="floorName.floor1"></FloorComponent>
 	</div>
 
 </div>
@@ -73,6 +73,7 @@ export default {
 			adBanner:"",
 			recommendGoods:[],
 			floor1:[],		/* 获得楼层数据 */
+			floorName:{},
 			swiperOption:{
 				slidesPerView:3
 			}
@@ -103,6 +104,8 @@ export default {
 				this.recommendGoods = response.data.data.recommend;
 				/* 5、获得楼层数据 */
 				this.floor1 = response.data.data.floor1;
+				/* 6、获得floorName */
+				this.floorName = response.data.data.floorName;
 			}
 		}).catch((error) => {
 			console.log(error);

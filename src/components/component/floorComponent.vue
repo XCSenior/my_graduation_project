@@ -1,6 +1,7 @@
 <template>
 	<!-- 楼层1数据 -->
 	<div class="floor">
+		<div class="floor-title">{{floorTitle}}</div>
 		<div class="floor-anomaly">		<!-- 不规则的楼层 -->
 			<div class="floor-one">
 				<img :src.lazy="floorData0.image" width="100%">
@@ -25,7 +26,7 @@
 <script>
 export default {
 	name:"FloorComponent",
-	props:["floorData"],
+	props:["floorData","floorTitle"],
 	data() {
 		return {
 			floorData0:{},
@@ -44,6 +45,13 @@ export default {
 </script>
 
 <style scoped>
+	.floor-title{
+		font-size: 0.875rem;
+		text-align: center;
+		height: 1.8rem;
+		line-height: 1.8rem;
+		border-bottom: 0.0625rem solid #cccccc;
+	}
 	.floor-anomaly{
 		display: flex;
 		flex-direction: row;
