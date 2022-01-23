@@ -66,6 +66,8 @@
 <script>
 import axios from 'axios';
 import 'swiper/dist/css/swiper.css';
+import url from '../../serviceAPI.config';
+
 import {swiper,swiperSlide} from 'vue-awesome-swiper';
 import {toMoney} from '../../filters/moneyFilter.js';
 import FloorComponent from '../component/floorComponent.vue';
@@ -96,7 +98,7 @@ export default {
 	created() {
 		/* 获取首页JSON数据 */
 		axios({
-			url:"http://127.0.0.1:4000/index",
+			url:url.getShoppingMallInfo,
 			method:"get"
 		})
 		.then((response) => {
