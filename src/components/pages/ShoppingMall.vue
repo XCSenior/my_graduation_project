@@ -25,9 +25,11 @@
 	<!-- 商品类别type-bar -->
 	<div class="type-bar">
 		<div v-for="(cate,index) in category" :key="cate.mallCategoryId">
-			<!-- lazy懒加载 -->
-			<img v-lazy="cate.image" width="90%">
-			<span>{{cate.mallCategoryName}}</span>
+			<a href="javascript:;">
+				<!-- lazy懒加载 -->
+				<img v-lazy="cate.image" width="90%">
+				<span>{{cate.mallCategoryName}}</span>
+			</a>
 		</div>
 	</div>
 	<!-- 广告条adBanner -->
@@ -172,6 +174,13 @@ export default {
 		padding: 0.3rem;
 		font-size: 0.75rem;
 		text-align: center;
+	}
+	.type-bar a{
+		text-decoration: none;
+		color: #000000;
+	}
+	.type-bar a:active{
+		color: #686868;
 	}
 	.recommend-area{
 		background-color: #ffffff;
