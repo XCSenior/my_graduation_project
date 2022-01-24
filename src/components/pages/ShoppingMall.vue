@@ -60,6 +60,22 @@
 		<FloorComponent :floorData="floor2" :floorTitle="floorName.floor2"></FloorComponent>
 		<!-- 楼层3数据 -->
 		<FloorComponent :floorData="floor3" :floorTitle="floorName.floor3"></FloorComponent>
+
+		<!-- 商品热卖 Hot-Area :实现上拉加载功能 -->
+		<div class="hot-area">
+			<div class="hot-title">热卖商品</div>
+			<div class="hot-goods">
+				<!-- ????此处需要list组件 -->
+				<van-list>
+					<van-row>
+						<van-col span="12" v-for="(item,index) in hotGoods" :key="item.goodsId">	<!-- 一列占12格 -->
+							<GoodsInfoComponent :goodsImage="item.image" :goodsName="item.name" :goodsPrice="item.price"></GoodsInfoComponent>
+						</van-col>
+					</van-row>
+				</van-list>
+			</div>
+		</div>
+
 	</div>
 
 </div>
@@ -68,14 +84,17 @@
 <script>
 import axios from 'axios';
 import 'swiper/dist/css/swiper.css';
-import url from '../../serviceAPI.config';
+import url from '@/serviceAPI.config';
 
 import {swiper,swiperSlide} from 'vue-awesome-swiper';
 import {toMoney} from '@/filters/moneyFilter.js';
+
 import FloorComponent from '../component/floorComponent.vue';
+import GoodsInfoComponent from '../component/goodsInfoComponent.vue';
+
 export default {
 	name:"ShoppingMall",
-	components:{swiper,swiperSlide,FloorComponent},
+	components:{swiper,swiperSlide,FloorComponent,GoodsInfoComponent},
 	filters:{
 		moneyFilter(money){
 			return toMoney(money);
@@ -92,7 +111,8 @@ export default {
 			floor2:[],
 			floor3:[],
 			floorName:{},
-			swiperOption:{
+			hotGoods:[],	/* 商品热卖数据 */
+			swiperOption:{		/* 配置轮播图对象 */
 				slidesPerView:3
 			}
 		}
@@ -126,6 +146,9 @@ export default {
 				this.floor3 = response.data.data.floor3;
 				/* 6、获得floorName */
 				this.floorName = response.data.data.floorName;
+				/* 7、获得商品热卖hotGoods */
+				this.hotGoods = response.data.data.hotGoods;
+				console.log(this.hotGoods);
 			}
 		}).catch((error) => {
 			console.log(error);
@@ -209,5 +232,13 @@ export default {
 	}
 	.recommend-item a:active{
 		color: #686868;
+	}
+
+	/* 热卖商品 */
+	.hot-area{
+		text-align: center;
+		font-size: 0.875rem;
+		height: 1.8rem;
+		line-height: 1.8rem;
 	}
 </style>
