@@ -71,7 +71,7 @@ import 'swiper/dist/css/swiper.css';
 import url from '../../serviceAPI.config';
 
 import {swiper,swiperSlide} from 'vue-awesome-swiper';
-import {toMoney} from '../../filters/moneyFilter.js';
+import {toMoney} from '@/filters/moneyFilter.js';
 import FloorComponent from '../component/floorComponent.vue';
 export default {
 	name:"ShoppingMall",
@@ -129,6 +129,7 @@ export default {
 			}
 		}).catch((error) => {
 			console.log(error);
+			console.log("首页axios请求发生错误啦!!");
 		});
 	},
 }
