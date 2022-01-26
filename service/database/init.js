@@ -1,7 +1,7 @@
 /* 初始化对数据库的连接,使用Mongoose */
 const mongoose = require("mongoose");
-const db = "mongodb://localhost/smile-db";
-/** 
+const db = "mongodb://localhost:27017/smile-db";
+/**
  * TODO:解决数据库无法连接，也无失败响应的问题
  */
 
