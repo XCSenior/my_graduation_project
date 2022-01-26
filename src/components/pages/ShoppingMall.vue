@@ -148,7 +148,6 @@ export default {
 				this.floorName = response.data.data.floorName;
 				/* 7、获得商品热卖hotGoods */
 				this.hotGoods = response.data.data.hotGoods;
-				console.log(this.hotGoods);
 			}
 		}).catch((error) => {
 			console.log(error);
