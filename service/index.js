@@ -14,7 +14,9 @@ app.listen(3000,() => {
 	console.log("Koa2服务开启成功,3000端口监听中");
 });
 
-// console.log("启动数据库init服务");
 /* 数据库立即执行函数 */
-connect();
-// console.log("数据库启动服务完成");
+console.log("启动数据库init服务");
+(async function toConnectDatabase(){
+	await connect();
+})();
+
