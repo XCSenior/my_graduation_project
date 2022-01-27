@@ -1,4 +1,5 @@
 /* 后台服务器index */
+// const mongoose = require('mongoose');
 const Koa = require("koa");
 const app = new Koa();
 /* 数据库连接connect函数对象 */
@@ -13,8 +14,7 @@ app.listen(3000,() => {
 	console.log("Koa2服务开启成功,3000端口监听中");
 });
 
-
+// console.log("启动数据库init服务");
 /* 数据库立即执行函数 */
-(async () => {
-	await connect();
-});
+connect();
+// console.log("数据库启动服务完成");
