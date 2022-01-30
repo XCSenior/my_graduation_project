@@ -12,7 +12,6 @@ exports.connect =  ()=>{
 	/* 声明最大连接次数 */
 	let maxConnectTimes = 0;
 
-
 	/* 连接数据库 */
 	mongoose.connect(db);
 

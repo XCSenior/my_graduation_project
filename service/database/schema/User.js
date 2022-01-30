@@ -6,7 +6,7 @@ let ObjectId = Schema.Types.ObjectId;
 
 // 创建UserSchema用户模型
 const userSchema = new Schema({
-	UserId : ObjectId,
+	UserId : ObjectId,/* userId主键,使用mongoose自动生成 */
 	userName : { unique:true , type : String },
 	passWord : String,
 	createAt : { type: Date , default: Date.now() },
