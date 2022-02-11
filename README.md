@@ -10,6 +10,11 @@
 /* 合起来一行显示,才能输入进mongoShell命令中 */
 db.createUser({user: "XCSenior",pwd: "123",roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]})
 ```
+## mongoDB启动与mongoDB控制台
+```powershell
+mongod
+mongo
+```
 
 ## 打开项目根目录命令行,以及service文件夹命令行,安装所依赖的库
 ```powershell
