@@ -11,6 +11,7 @@
 db.createUser({user: "XCSenior",pwd: "123",roles: [ { role: "userAdminAnyDatabase", db: "admin" } ]})
 ```
 ## mongoDB启动与mongoDB控制台
+管理员启动shell,输入：
 ```powershell
 mongod
 mongo
