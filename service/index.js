@@ -23,7 +23,7 @@ console.log("启动数据库init服务");
 	// 插入一条数据测试
 	const User = mongoose.model("User");	//引入模型
 	let oneUser = new User({
-		userName:"CBJ",
+		userName:"sb01",
 		password:"123456"
 	});
 	oneUser.save().then((result) => {
@@ -32,10 +32,10 @@ console.log("启动数据库init服务");
 		console.warn("插入oneUser失败");
 	});
 
-	// 查询数据测试
-	let user = await User.findOne({}).exec();
-	console.log("---------------------");
-	console.log(user);
-	console.log("---------------------");
+	// // 查询数据测试
+	// let user = await User.findOne({}).exec();
+	// console.log("---------------------");
+	// console.log(user);
+	// console.log("---------------------");
 })();
 
