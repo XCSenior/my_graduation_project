@@ -8,7 +8,7 @@ let ObjectId = Schema.Types.ObjectId;
 const userSchema = new Schema({
 	UserId : { type:ObjectId },/* userId主键,使用mongoose自动生成 */
 	userName : { unique:true , type : String },/* unique表示不重复的 */
-	passWord : String,
+	password : String,
 	createAt : { type: Date , default: Date.now() },
 	lastLoginAt : { type: Date , default: Date.now() }
 });

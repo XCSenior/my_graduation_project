@@ -1,11 +1,18 @@
 /* 初始化对数据库的连接,使用Mongoose */
 const mongoose = require("mongoose");
 const db = "mongodb://localhost:27017/smile-db";
-/**
- * TODO:数据库连接问题解决，但应该解决异步方面的问题
- */
+// 引入glob和resolve
+const glob = require("glob");
+const { resolve } = require("path");
 
 mongoose.Promise = global.Promise;
+
+/* 载入Schemas */
+exports.initSchemas = () => {
+	//引入所有schema目录下的js文件，也就是所有schema
+	glob.sync(resolve(__dirname,"./schema","**/*.js")).forEach(require);
+}
+
 
 /* 向外暴露connect函数 */
 exports.connect =  ()=>{
