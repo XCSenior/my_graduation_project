@@ -1,7 +1,10 @@
 const BASEURL = "http://127.0.0.1:4000/";
+const LOCALURL = "http://localhost:3000/";
 
 const URL = {
-	getShoppingMallInfo: BASEURL + "index" 		/* 商城首页所有信息 */
+	getShoppingMallInfo: BASEURL + "index" ,		/* 商城首页所有信息 */
+	getGoodsInfo:BASEURL + "getGoodsInfo",
+	registerUser : LOCALURL + "user/register",	/* 连接后端数据接口 */
 }
 
 module.exports = URL;

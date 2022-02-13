@@ -2,9 +2,15 @@
 const mongoose = require('mongoose');
 const Koa = require("koa");
 const Router = require("koa-router");
+const bodyParser = require("koa-bodyparser");	//解析前端post参数
+const cors = require("koa2-cors");	//解决跨域问题
 const user = require("./appApi/user");
 
 const app = new Koa();
+/* 后台服务接受前端post数据插件 */
+app.use(bodyParser());
+app.use(cors());
+
 /* 数据库连接connect函数对象,初始化Schema函数 */
 const { connect , initSchemas } = require('./database/init.js');
 
