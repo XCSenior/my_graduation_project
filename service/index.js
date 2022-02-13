@@ -34,26 +34,26 @@ app.listen(3000,() => {
 
 /* 数据库立即执行函数 */
 // 增加获取所有Schema，遍历后引入，并加载进服务中，然后载入模型后进行增查操作
-// console.log("启动数据库init服务");
-// (async function toConnectDatabase(){
-// 	await connect();
-// 	initSchemas();	//载入schemas
-// 	// 插入一条数据测试
-// 	const User = mongoose.model("User");	//引入模型
-// 	let oneUser = new User({
-// 		userName:"sb01",
-// 		password:"123456"
-// 	});
-// 	oneUser.save().then((result) => {
-// 		console.log("插入oneUser成功");
-// 	}).catch((err) => {
-// 		console.warn("插入oneUser失败");
-// 	});
+console.log("启动数据库init服务");
+(async function toConnectDatabase(){
+	await connect();
+	initSchemas();	//载入schemas
+	// 插入一条数据测试
+	// const User = mongoose.model("User");	//引入模型
+	// let oneUser = new User({
+	// 	userName:"sb01",
+	// 	password:"123456"
+	// });
+	// oneUser.save().then((result) => {
+	// 	console.log("插入oneUser成功");
+	// }).catch((err) => {
+	// 	console.warn("插入oneUser失败");
+	// });
 
-// 	// // 查询数据测试
-// 	// let user = await User.findOne({}).exec();
-// 	// console.log("---------------------");
-// 	// console.log(user);
-// 	// console.log("---------------------");
-// })();
+	// // 查询数据测试
+	// let user = await User.findOne({}).exec();
+	// console.log("---------------------");
+	// console.log(user);
+	// console.log("---------------------");
+})();
 

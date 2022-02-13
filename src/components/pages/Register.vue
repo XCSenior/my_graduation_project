@@ -25,13 +25,14 @@
 			required
 		/>
 		<div class="register-button">
-			<van-button type="primary" size="large" @click="axiosRegisterUser">马上注册</van-button>
+			<van-button type="primary" size="large" @click="axiosRegisterUser" :loading="openLoading">马上注册</van-button>
 		</div>
 	</div>
 </div>
 </template>
 
 <script>
+import { Toast } from 'vant';
 import axios from 'axios';
 import url from '../../serviceAPI.config';
 export default {
@@ -39,7 +40,8 @@ export default {
 	data() {
 		return {
 			username:"",
-			password:""
+			password:"",
+			openLoading:false,	//是否开启用户注册的Loading状态
 		}
 	},
 	methods:{
@@ -47,17 +49,30 @@ export default {
 			this.$router.go(-1);
 		},
 		axiosRegisterUser(){
+			this.openLoading = true;
 			axios({
 				url:url.registerUser,
 				method:"post",
 				data:{
-					username:this.username,
+					userName:this.username,
 					password:this.password
 				}
 			}).then((response) => {
-				console.log(response,"我是axios的response");
+				// console.log(response,"我是axios的response");
+				if(response.data.code === 200){
+					// Toast是Vant的提示组件
+					Toast.success(response.data.message);
+				}
+				if(response.data.code === 500){
+					// Toast是Vant的提示组件
+					console.log(response.data.message,"我是axios的err");
+					Toast.fail("注册失败");
+					this.openLoading = false;
+				}
 			}).catch((err) => {
-				console.log(err,"我是axios的err");
+				console.log(err);
+				console.log(response.data.message,"我是axios的err");
+				Toast.fail("注册失败");
 			});
 		}
 	}
