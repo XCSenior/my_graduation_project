@@ -62,6 +62,8 @@ export default {
 				if(response.data.code === 200){
 					// Toast是Vant的提示组件
 					Toast.success(response.data.message);
+					/* 注册成功后跳转进入个人中心页面 */
+					this.$router.push("/");
 				}
 				if(response.data.code === 500){
 					// Toast是Vant的提示组件
@@ -73,6 +75,7 @@ export default {
 				console.log(err);
 				console.log(response.data.message,"我是axios的err");
 				Toast.fail("注册失败");
+				this.openLoading = false;
 			});
 		}
 	}
