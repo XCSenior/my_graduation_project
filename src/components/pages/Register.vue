@@ -8,6 +8,7 @@
 	/>
 	<div class="register-panel">
 		<van-field
+			class="van-field-area"
 			v-model="username"
 			label="用户名"
 			icon="clear"
@@ -16,6 +17,7 @@
 			@click-icon="username=''"
 		/>
 		<van-field
+			class="van-field-area"
 			v-model="password"
 			type="password"
 			label="密码"
@@ -53,7 +55,7 @@ export default {
 		margin: 10rem auto;
 		padding-bottom: 20rem;
 	}
-	.register-button{
-		padding-top: 10px;
+	.van-field-area{
+		margin-bottom: 10px;
 	}
 </style>
