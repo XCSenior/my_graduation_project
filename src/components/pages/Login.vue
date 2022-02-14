@@ -48,6 +48,16 @@ export default {
 			passwordErrorMsg:"", //当密码出现错误时的提示信息
 		}
 	},
+	created() {
+		if(localStorage.userInfo){
+			setTimeout(() => {
+				Toast.success("您已登录");
+			}, 1000);
+			setTimeout(() => {
+				this.$router.push("/");
+			},2000);
+		}
+	},
 	methods:{
 		goBack(){
 			this.$router.go(-1);
@@ -73,9 +83,21 @@ export default {
 			}).then( (response) => {
 				console.log(response);
 				if(response.data.code === 200 && response.data.message){
-					Toast.success("登录成功");
-					this.openLoading = false;
-					this.$router.push("/");
+					new Promise((resolve, reject) => {
+						localStorage.userInfo = {userName:this.username};
+						/* 模拟存储延迟 */
+						setTimeout(() => {
+							resolve();
+						},500);
+					}).then((result) => {
+						Toast.success("登录成功");
+						this.openLoading = false;
+						this.$router.push("/");	//跳转至个人主页
+					}).catch((err) => {
+						Toast.fail("登录状态保存失败");
+						console.log(err);
+						this.openLoading = false;
+					});
 				}else{
 					Toast.fail("登录失败");
 					this.openLoading = false;
