@@ -72,12 +72,18 @@ export default {
 				}
 			}).then( (response) => {
 				console.log(response);
-				this.openLoading = false;
-				Toast.success(response.data.message);
+				if(response.data.code === 200 && response.data.message){
+					Toast.success("登录成功");
+					this.openLoading = false;
+					this.$router.push("/");
+				}else{
+					Toast.fail("登录失败");
+					this.openLoading = false;
+				}
 			}).catch((err) => {
 				console.log(err);
+				Toast.fail("登录失败");
 				this.openLoading = false;
-				Toast.fail("注册失败");
 			});
 		},
 		/* 表单验证方法 */
