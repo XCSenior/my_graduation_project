@@ -64,16 +64,20 @@ export default {
 		axiosLoginUser(){
 			this.openLoading = true;
 			axios({
-				url:url.registerUser,
+				url:url.login,
 				method:"post",
 				data:{
 					userName:this.username,
 					password:this.password
 				}
 			}).then( (response) => {
-				
+				console.log(response);
+				this.openLoading = false;
+				Toast.success(response.data.message);
 			}).catch((err) => {
-
+				console.log(err);
+				this.openLoading = false;
+				Toast.fail("注册失败");
 			});
 		},
 		/* 表单验证方法 */

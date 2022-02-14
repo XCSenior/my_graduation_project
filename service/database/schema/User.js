@@ -14,8 +14,6 @@ const userSchema = new Schema({
 	password : String,
 	createAt : { type: Date , default: Date.now() },
 	lastLoginAt : { type: Date , default: Date.now() }
-},{
-	collection:"user"
 });
 
 /* 每次保存新增数据的时候都进行加盐加密处理 */
@@ -38,6 +36,24 @@ userSchema.pre("save" , function(next){
 		});
 	})
 });
+
+
+/* 密码比对 */
+userSchema.methods = {
+	// 密码的比对，参数1是客户端的密码，参数2是数据库中提取的密码
+	comparePassword:(_password,password)=>{
+		return new Promise((resolve, reject) => {
+			bcrypt.compare(_password,password,(err,isMatch) => {	//isMatch是比对成功后的结果
+				if(!err){
+					resolve(isMatch);
+				}else{
+					reject(err);
+				}
+			});
+		});
+	}
+}
+
 
 
 /* 发布模型 */

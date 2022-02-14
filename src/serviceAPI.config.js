@@ -5,6 +5,7 @@ const URL = {
 	getShoppingMallInfo: BASEURL + "index" ,		/* 商城首页所有信息 */
 	getGoodsInfo:BASEURL + "getGoodsInfo",
 	registerUser : LOCALURL + "user/register",	/* 连接后端数据接口 */
+	login : LOCALURL + "user/login",	/* 用户登录接口 */
 }
 
 module.exports = URL;
