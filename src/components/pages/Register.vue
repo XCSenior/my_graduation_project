@@ -15,6 +15,7 @@
 			placeholder="请输入用户名："
 			required
 			@click-icon="username=''"
+			:error-message="usernameErrorMsg"
 		/>
 		<van-field
 			class="van-field-area"
@@ -23,9 +24,10 @@
 			label="密码"
 			placeholder="请输入密码："
 			required
+			:error-message="passwordErrorMsg"
 		/>
 		<div class="register-button">
-			<van-button type="primary" size="large" @click="axiosRegisterUser" :loading="openLoading">马上注册</van-button>
+			<van-button type="primary" size="large" @click="registerAction" :loading="openLoading">马上注册</van-button>
 		</div>
 	</div>
 </div>
@@ -42,12 +44,15 @@ export default {
 			username:"",
 			password:"",
 			openLoading:false,	//是否开启用户注册的Loading状态
+			usernameErrorMsg:"", //当用户名出现错误时的提示信息
+			passwordErrorMsg:"", //当密码出现错误时的提示信息
 		}
 	},
 	methods:{
 		goBack(){
 			this.$router.go(-1);
 		},
+		/* 发送请求注册用户 */
 		axiosRegisterUser(){
 			this.openLoading = true;
 			axios({
@@ -77,6 +82,30 @@ export default {
 				Toast.fail("注册失败");
 				this.openLoading = false;
 			});
+		},
+		/* 表单验证方法 */
+		checkForm(){
+			let isOk = true;
+			if(this.username.length < 5){
+				this.usernameErrorMsg = this.username.length === 0 ? "用户名不能为空！" : "用户名不能少于5位"
+				isOk = false;
+			}else{
+				this.usernameErrorMsg = "";
+			}
+			if(this.password.length < 5){
+				this.passwordErrorMsg = this.password.length === 0 ? "密码不能为空！" : "密码不能少于5位"
+				isOk = false;
+			}else{
+				this.passwordErrorMsg = "";
+			}
+			return isOk
+		},
+		/* 注册按钮响应事件 */
+		registerAction(){
+			// if(this.checkForm()){
+			// 	this.axiosRegisterUser();
+			// }
+			this.checkForm() && this.axiosRegisterUser()
 		}
 	}
 }
