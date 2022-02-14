@@ -14,6 +14,8 @@ const userSchema = new Schema({
 	password : String,
 	createAt : { type: Date , default: Date.now() },
 	lastLoginAt : { type: Date , default: Date.now() }
+},{
+	collection:"user"
 });
 
 /* 每次保存新增数据的时候都进行加盐加密处理 */
