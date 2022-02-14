@@ -43,7 +43,7 @@ export default {
 		return {
 			username:"",
 			password:"",
-			openLoading:false,	//是否开启用户注册的Loading状态
+			openLoading:false,	//是否开启用户登录的Loading状态
 			usernameErrorMsg:"", //当用户名出现错误时的提示信息
 			passwordErrorMsg:"", //当密码出现错误时的提示信息
 		}
@@ -60,7 +60,7 @@ export default {
 			// }
 			this.checkForm() && this.axiosLoginUser()
 		},
-		/* 发送请求注册用户 */
+		/* 发送请求登录用户 */
 		axiosLoginUser(){
 			this.openLoading = true;
 			axios({
