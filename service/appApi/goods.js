@@ -6,7 +6,7 @@ const fs = require('fs');
 let router = new Router();
 
 router.get("/insertAllGoodsInfo",async (ctx) => {
-	fs.readFile("./newGoods.json","utf8", (err,data) => {
+	fs.readFile("./data_json/newGoods.json","utf8", (err,data) => {
 		data = JSON.parse(data);
 		let saveCount = 0;
 
@@ -17,11 +17,11 @@ router.get("/insertAllGoodsInfo",async (ctx) => {
 				++saveCount;
 				console.log("成功",saveCount);
 			}).catch((err) => {
-				console.log(err,"单条数据保存失败");
+				console.log(err.errmsg,"单条数据保存失败");
 			});
 		});
 	});
-	ctx.body = "开始导入数据";
+	ctx.body = "开始导入newGoods数据至数据库中";
 });
 
 /* 暴露router */
