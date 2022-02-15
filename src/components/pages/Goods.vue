@@ -11,10 +11,12 @@ export default {
 	name:"Goods",
 	data() {
 		return {
-			goodsId:"775e575ce28a4f89b1dfe2c99eb08ae7",
+			goodsId:"",
 		}
 	},
 	created() {
+		this.goodsId = this.$route.query.goodsId;
+		console.log("我是this.goodsId",this.goodsId);
 		this.getInfo();
 	},
 	methods: {
