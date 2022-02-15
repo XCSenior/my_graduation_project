@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-fs.readFile("./goods.json","utf-8",function(err,data) {
+fs.readFile("./data_json/goods.json","utf-8",function(err,data) {
 	let newData = JSON.parse(data);
 	let pushData = [];
 	let i = 0;
@@ -17,7 +17,7 @@ fs.readFile("./goods.json","utf-8",function(err,data) {
 	// console.log(pushData);
 
 	/* 提纯后写入新的文件，生成提纯结果 */
-	fs.writeFile("./newGoods.json",JSON.stringify(pushData),function (err) {
+	fs.writeFile("./data_json/newGoods.json",JSON.stringify(pushData),function (err) {
 		!err ? console.log("写入newGoods.json成功!") : console.log("写入newGoods.json失败",err);
 	});
 })

@@ -69,7 +69,7 @@
 				<van-list>
 					<van-row>
 						<van-col span="12" v-for="(item,index) in hotGoods" :key="item.goodsId">	<!-- 一列占12格 -->
-							<GoodsInfoComponent :goodsImage="item.image" :goodsName="item.name" :goodsPrice="item.price"></GoodsInfoComponent>
+							<GoodsInfoComponent :goodsImage="item.image" :goodsName="item.name" :goodsPrice="item.price" :goodsId="item.goodsId"></GoodsInfoComponent>
 						</van-col>
 					</van-row>
 				</van-list>
