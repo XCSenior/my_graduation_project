@@ -24,6 +24,26 @@ router.get("/insertAllGoodsInfo",async (ctx) => {
 	ctx.body = "开始导入newGoods数据至数据库中";
 });
 
+/* 插入Category的数据 */
+router.get("/insertAllCategory",async (ctx) => {
+	fs.readFile("./data_json/Category.json","utf8", (err,data) => {
+		data = JSON.parse(data);
+		let saveCount = 0;
+
+		const Category = mongoose.model("Category");	//引入模型
+		data.RECORDS.map((value,index) => {		//遍历
+			let newCategory = new Category(value);
+			newCategory.save().then((result) => {
+				++saveCount;
+				console.log("成功",saveCount);
+			}).catch((err) => {
+				console.log(err.errmsg,"单条数据保存失败");
+			});
+		});
+	});
+	ctx.body = "开始导入Category.json数据至数据库中";
+});
+
 /* 暴露router */
 module.exports = router;
 
