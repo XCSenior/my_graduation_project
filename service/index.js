@@ -5,6 +5,7 @@ const Router = require("koa-router");
 const bodyParser = require("koa-bodyparser");	//解析前端post参数
 const cors = require("koa2-cors");	//解决跨域问题
 const user = require("./appApi/user");
+const goods = require('./appApi/goods');
 
 const app = new Koa();
 /* 后台服务接受前端post数据插件 */
@@ -18,6 +19,7 @@ const { connect , initSchemas } = require('./database/init.js');
 /* 装载所有子路由 */
 let router = new Router();
 router.use("/user" , user.routes());
+router.use("/goods",goods.routes());
 // 路由中间件
 app.use(router.routes());
 app.use(router.allowedMethods());

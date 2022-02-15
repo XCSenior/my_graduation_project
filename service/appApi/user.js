@@ -1,5 +1,4 @@
 const Router = require('koa-router');
-// TODO:将数据存入数据库中
 const mongoose = require('mongoose');
 
 let router = new Router();
