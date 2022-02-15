@@ -21,7 +21,7 @@ router.get("/insertAllGoodsInfo",async (ctx) => {
 			});
 		});
 	});
-	ctx.body = "开始导入newGoods数据至数据库中";
+	ctx.body = "开始导入newGoods.json数据至数据库中";
 });
 
 /* 插入Category的数据 */
