@@ -16,4 +16,4 @@ new Vue({
 	components:{App}
 }).$mount('#app')
 
-console.log("😂main.js");
+// console.log("😂main.js");
