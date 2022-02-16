@@ -8,7 +8,7 @@
 				<van-col span="6">
 					<div id="leftNav">
 						<ul>
-							<li @click="clickCategory(index)"
+							<li @click="clickCategory(index,item.ID)"
 								:class="{categoryActive:categoryIndex === index}"
 								v-for="(item, index) in category" :key="item.ID">
 								{{item.MALL_CATEGORY_NAME}}
@@ -17,8 +17,12 @@
 					</div>
 				</van-col>
 				<van-col span="18">
-					<div>
-						右侧列表
+					<div class="tabCategorySub">	<!-- FIXME:修正active属性无法生效的问题 -->
+						<van-tabs v-model="active">
+							<van-tab v-for="(item, index) in categorySub" :key="index" :title="item.MALL_SUB_NAME">
+
+							</van-tab>
+						</van-tabs>
 					</div>
 				</van-col>
 			</van-row>
@@ -34,8 +38,10 @@
 		name:"CategoryList",
 		data() {
 			return {
-				category:[],
-				categoryIndex:0,
+				category:[],	//大类类别
+				categoryIndex:0,	//大类索引
+				categorySub:[],	//小类类别
+				active:0,	//默认从第1个tab激活标签
 			}
 		},
 		created() {
@@ -54,6 +60,7 @@
 					console.log("我是getCategory的response",response);
 					if (response.data.code === 200 && response.data.message) {
 						this.category = response.data.message;
+						this.getCategorySubByCategoryID(this.category[0].ID);
 					} else {
 						Toast.fail("获取数据失败");
 					}
@@ -61,8 +68,27 @@
 					console.log("我是getCategory的err",err);
 				});
 			},
-			clickCategory(index){
+			clickCategory(index,categoryId){
 				this.categoryIndex = index;
+				this.getCategorySubByCategoryID(categoryId);
+			},
+			/* 根据大类ID读取小类类别列表 */
+			getCategorySubByCategoryID(categoryId){
+				axios({
+					url:url.getCategorySubList,
+					method:"post",
+					data:{categoryId},
+				}).then((response) => {
+					console.log("我是getCategorySubByCategoryID的response",response);
+					if (response.data.code === 200 && response.data.message) {
+						this.categorySub = response.data.message;
+						this.active = 0;
+					} else {
+						Toast.fail("获取数据失败");
+					}
+				}).catch((err) => {
+					console.log("我是getCategorySubByCategoryID的err",err);
+				});
 			}
 		},
 	};
