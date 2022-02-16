@@ -24,6 +24,13 @@
 							</van-tab>
 						</van-tabs>
 					</div>
+					<div id="list-div">
+						<van-list v-model="loading" :finished="finished" @load="onLoad">
+							<div class="list-item" v-for="(item, index) in list" :key="index">
+								{{item}}
+							</div>
+						</van-list>
+					</div>
 				</van-col>
 			</van-row>
 		</div>
@@ -42,6 +49,10 @@
 				categoryIndex:0,	//大类索引
 				categorySub:[],	//小类类别
 				active:0,	//默认从第1个tab激活标签
+
+				loading:false,	//上拉加载时候的变量
+				finished:false, 	//上拉加载是否有数据
+				list:[],		//商品数据
 			}
 		},
 		created() {
@@ -50,6 +61,7 @@
 		mounted() {
 			let windowHeight = document.documentElement.clientHeight;
 			document.getElementById("leftNav").style.height = windowHeight - 46 + "px";
+			document.getElementById("list-div").style.height = windowHeight - 90 + "px";	//限制list-div高度
 		},
 		methods: {
 			getCategory(){
@@ -89,6 +101,19 @@
 				}).catch((err) => {
 					console.log("我是getCategorySubByCategoryID的err",err);
 				});
+			},
+
+			/* 实现上拉加载方法 */
+			onLoad(){
+				setTimeout(() => {
+					for (let i = 0; i < 10; i++) {
+						this.list.push(this.list.length+1)
+					}
+					this.loading = false;	//完成后变成false
+					if (this.list.length>=40) {
+						this.finished = true;	//40个后没有数据了
+					}
+				}, 500);
 			}
 		},
 	};
@@ -107,5 +132,14 @@
 	}
 	.categoryActive{
 		background-color: #fff;
+	}
+	.list-item{
+		text-align: center;
+		line-height: 80px;
+		border-bottom: 1px solid #f0f0f0;
+		background-color: #fff;
+	}
+	#list-div{
+		overflow: scroll;
 	}
 </style>
