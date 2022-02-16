@@ -12,7 +12,7 @@
 			<img :src="goodsInfo.IMAGE1" width="100%" alt="goods.IMAGE1">
 		</div>
 		<div class="goods-name">{{goodsInfo.NAME}}</div>
-		<div class="goods-price">价格{{goodsInfo.PRESENT_PRICE}}</div>
+		<div class="goods-price">价格：￥{{goodsInfo.PRESENT_PRICE | moneyFilter}}元</div>
 		<div>
 			<van-tabs>
 				<van-tab title="商品详情">
@@ -25,6 +25,14 @@
 				</van-tab>
 			</van-tabs>
 		</div>
+		<div class="goods-bottom">
+			<div>
+				<van-button size="large" type="primary" :square="true">加入购物车</van-button>
+			</div>
+			<div>
+				<van-button size="large" type="danger" :square="true">直接购买</van-button>
+			</div>
+		</div>
 	</div>
 </template>
 
@@ -32,12 +40,19 @@
 import axios from 'axios';
 import url from '../../serviceAPI.config';
 import {Toast} from 'vant';
+import {toMoney} from '../../filters/moneyFilter';
 export default {
 	name:"Goods",
 	data() {
 		return {
 			goodsId:"",
 			goodsInfo:{}	//商品详细信息
+		}
+	},
+	filters:{
+		//注册过滤器
+		moneyFilter(money){
+			return toMoney(money);
 		}
 	},
 	created() {
@@ -80,5 +95,19 @@ export default {
 	}
 	.goods-price{
 		background-color: red;
+	}
+	.goods-bottom{
+		position: fixed;
+		bottom: 0px;
+		left: 0px;
+		background-color: #fff;
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+	}
+	.goods-bottom > div{
+		flex:1;
+		padding: 5px;
 	}
 </style>
