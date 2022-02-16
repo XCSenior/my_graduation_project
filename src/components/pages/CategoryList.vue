@@ -17,8 +17,8 @@
 					</div>
 				</van-col>
 				<van-col span="18">
-					<div class="tabCategorySub">	<!-- FIXME:修正active属性无法生效的问题 -->
-						<van-tabs v-model="active">
+					<div class="tabCategorySub">
+						<van-tabs v-model="active" @click="onClickCategorySub">
 							<van-tab v-for="(item, index) in categorySub" :key="index" :title="item.MALL_SUB_NAME">
 
 							</van-tab>
@@ -27,8 +27,14 @@
 					<div id="list-div">
 						<van-pull-refresh v-model="isRefresh" @refresh="onRefresh">
 							<van-list v-model="loading" :finished="finished" @load="onLoad">
-								<div class="list-item" v-for="(item, index) in list" :key="index">
-									{{item}}
+								<div class="list-item" v-for="(item, index) in goodList" :key="index">
+									<div class="list-item-image">
+										<img :src="item.IMAGE1" width="100%">
+									</div>
+									<div class="list-item-text">
+										<div>{{item.NAME}}</div>
+										<div>￥{{item.ORI_PRICE}}元</div>
+									</div>
 								</div>
 							</van-list>
 						</van-pull-refresh>
@@ -54,8 +60,12 @@
 
 				loading:false,	//上拉加载时候的变量
 				finished:false, 	//上拉加载是否有数据
-				list:[],		//商品数据
+				// list:[],		//数据测试
 				isRefresh:false,	//下拉刷新
+
+				page:1,		//商品列表页数
+				goodList:[],	//商品列表信息
+				categorySubId:"",	//商品子类ID
 			}
 		},
 		created() {
@@ -83,8 +93,15 @@
 					console.log("我是getCategory的err",err);
 				});
 			},
+
+			/* 点击大类类别 */
 			clickCategory(index,categoryId){
 				this.categoryIndex = index;
+				/* 初始化参数 */
+				this.goodList = [];
+				this.finished = false;
+				this.page = 1;
+
 				this.getCategorySubByCategoryID(categoryId);
 			},
 			/* 根据大类ID读取小类类别列表 */
@@ -98,6 +115,9 @@
 					if (response.data.code === 200 && response.data.message) {
 						this.categorySub = response.data.message;
 						this.active = 0;
+
+						this.categorySubId = this.categorySub[0].ID;
+						this.onLoad();
 					} else {
 						Toast.fail("获取数据失败");
 					}
@@ -109,14 +129,10 @@
 			/* 实现上拉加载方法 */
 			onLoad(){
 				setTimeout(() => {
-					for (let i = 0; i < 10; i++) {
-						this.list.push(this.list.length+1)
-					}
-					this.loading = false;	//完成后变成false
-					if (this.list.length>=40) {
-						this.finished = true;	//40个后没有数据了
-					}
-				}, 500);
+					/* 三元运算,可能初始化的时候没有 */
+					this.categorySubId = this.categorySubId ? this.categorySubId : this.categorySub[0].ID;
+					this.getGoodList();
+				}, 1000);
 			},
 
 			/* 实现下拉刷新方法 */
@@ -127,6 +143,42 @@
 					this.list = [];
 					this.onLoad();
 				}, 500);
+			},
+
+			/* 获取goodList */
+			getGoodList(){
+				axios({
+					url:url.getGoodsListByCategorySubID,
+					method:"post",
+					data:{
+						categorySubId:this.categorySubId,
+						page:this.page
+					}
+				}).then((response) => {
+					console.log("我是getGoodList()的response",response);
+					if (response.data.code === 200 && response.data.message.length) {
+						++this.page;
+						this.goodList = this.goodList.concat(response.data.message);//合并数组
+					} else {
+						this.finished = true;	//完成后已经无数据
+					}
+					this.loading = false;
+
+				}).catch((err) => {
+					console.log("我是getGoodList()的err",err);
+				});
+			},
+
+			/* 点击获取子类 */
+			onClickCategorySub(index,title){
+				this.categorySubId = this.categorySub[index].ID;
+				// console.log("!!!!!",this.categorySubId);
+
+				/* 初始化操作 */
+				this.goodList = [];
+				this.finished = false;
+				this.page = 1;
+				this.onLoad();
 			}
 		},
 	};
@@ -146,13 +198,28 @@
 	.categoryActive{
 		background-color: #fff;
 	}
-	.list-item{
-		text-align: center;
-		line-height: 80px;
-		border-bottom: 1px solid #f0f0f0;
-		background-color: #fff;
-	}
+
 	#list-div{
 		overflow: scroll;
 	}
+
+	.list-item{
+        display: flex;
+        flex-direction: row;
+        font-size:0.6rem;
+        border-bottom: 1px solid #f0f0f0;
+        background-color: #fff;
+        padding:5px;
+    }
+    #list-div{
+        overflow: scroll;
+    }
+    .list-item-image{
+        flex:8;
+    }
+    .list-item-text{
+        flex:16;
+        margin-top:10px;
+        margin-left:10px;
+    }
 </style>
