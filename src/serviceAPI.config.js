@@ -9,6 +9,7 @@ const URL = {
 	getDetailGoodsInfo:LOCALURL + "goods/getDetailGoodsInfo", //获取商品详情
 	getCategoryList:LOCALURL + "goods/getCategoryList", //获取商品类别信息
 	getCategorySubList:LOCALURL + "goods/getCategorySubList", //获取商品类别信息
+	getGoodsListByCategorySubID:LOCALURL + "goods/getGoodsListByCategorySubID", //得到小类商品信息
 }
 
 module.exports = URL;
