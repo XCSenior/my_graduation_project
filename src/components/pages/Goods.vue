@@ -14,14 +14,14 @@
 		<div class="goods-name">{{goodsInfo.NAME}}</div>
 		<div class="goods-price">价格：￥{{goodsInfo.PRESENT_PRICE | moneyFilter}}元</div>
 		<div>
-			<van-tabs>
+			<van-tabs swipeable sticky>	<!-- 可以滑动切换 增加吸顶效果 -->
 				<van-tab title="商品详情">
 					<div class="detail" v-html="goodsInfo.DETAIL">
 
 					</div>
 				</van-tab>
 				<van-tab title="评论">
-					评论制作中
+					<p v-for="(item, index) in 30" :key="index">评论制作中</p>
 				</van-tab>
 			</van-tabs>
 		</div>
