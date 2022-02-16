@@ -25,11 +25,13 @@
 						</van-tabs>
 					</div>
 					<div id="list-div">
-						<van-list v-model="loading" :finished="finished" @load="onLoad">
-							<div class="list-item" v-for="(item, index) in list" :key="index">
-								{{item}}
-							</div>
-						</van-list>
+						<van-pull-refresh v-model="isRefresh" @refresh="onRefresh">
+							<van-list v-model="loading" :finished="finished" @load="onLoad">
+								<div class="list-item" v-for="(item, index) in list" :key="index">
+									{{item}}
+								</div>
+							</van-list>
+						</van-pull-refresh>
 					</div>
 				</van-col>
 			</van-row>
@@ -53,6 +55,7 @@
 				loading:false,	//上拉加载时候的变量
 				finished:false, 	//上拉加载是否有数据
 				list:[],		//商品数据
+				isRefresh:false,	//下拉刷新
 			}
 		},
 		created() {
@@ -113,6 +116,16 @@
 					if (this.list.length>=40) {
 						this.finished = true;	//40个后没有数据了
 					}
+				}, 500);
+			},
+
+			/* 实现下拉刷新方法 */
+			onRefresh(){
+				setTimeout(() => {
+					this.isRefresh = false;
+					this.finished = false;
+					this.list = [];
+					this.onLoad();
 				}, 500);
 			}
 		},
