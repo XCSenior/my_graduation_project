@@ -95,7 +95,7 @@ export default {
 			if (!isHaveGoods) {
 				let newGoodsInfo = {
 					goodsId:this.goodsInfo.ID,
-					Name:this.goodsInfo.Name,
+					Name:this.goodsInfo.NAME,
 					price:this.goodsInfo.PRESENT_PRICE,
 					image:this.goodsInfo.IMAGE1,
 					count:1	//默认买一个
