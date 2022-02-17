@@ -27,7 +27,7 @@
 					<div id="list-div">
 						<van-pull-refresh v-model="isRefresh" @refresh="onRefresh">
 							<van-list v-model="loading" :finished="finished" @load="onLoad">
-								<div class="list-item" v-for="(item, index) in goodList" :key="index">
+								<div class="list-item" @click="goGoodsInfo(item.ID)" v-for="(item, index) in goodList" :key="index">
 									<div class="list-item-image">
 										<img
 											:src="item.IMAGE1"
@@ -186,7 +186,13 @@
 				this.finished = false;
 				this.page = 1;
 				this.onLoad();
+			},
+
+			/* 跳转到商品详细页 */
+			goGoodsInfo(id){
+				this.$router.push({name:"Goods",params:{goodsId:id}});
 			}
+
 		},
 	};
 </script>

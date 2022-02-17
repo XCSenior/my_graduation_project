@@ -56,7 +56,8 @@ export default {
 		}
 	},
 	created() {
-		this.goodsId = this.$route.query.goodsId;//接收参数
+		//接收参数
+		this.goodsId = this.$route.query.goodsId ? this.$route.query.goodsId : this.$route.params.goodsId ;
 		this.getInfo();
 	},
 	methods: {
