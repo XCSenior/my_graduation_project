@@ -18,10 +18,14 @@ export default {
 	data() {
 		return {
 			active:0,	/* 显示界面的索引 */
+			nowPath:"",
 		}
 	},
 	mounted() {
-		this.$router.push({name:"ShoppingMall"});
+		this.changeTabbarActiveByPath();
+	},
+	updated() {
+		this.changeTabbarActiveByPath();
 	},
 	methods: {
 		changeTabbar(active){
@@ -42,7 +46,14 @@ export default {
 				default:
 					break;
 			}
-		}
+		},
+		changeTabbarActiveByPath(){
+			this.nowPath = this.$route.path;	/* 获得当前路径 */
+			if (this.nowPath === "/Cart") {
+				this.active = 2;
+			}
+
+		},
 	},
 }
 </script>

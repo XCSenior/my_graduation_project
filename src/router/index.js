@@ -15,7 +15,7 @@ export default new VueRouter({
 		{
 			path:"/", name:"Main", component:Main,
 			children:[
-				{	path:"/ShoppingMall", name:"ShoppingMall", component:ShoppingMall},
+				{	path:"/", name:"ShoppingMall", component:ShoppingMall},
 				{	path:"/CategoryList", name:"CategoryList", component:CategoryList},
 				{	path:"/Cart", name:"Cart", component:Cart},
 			]
