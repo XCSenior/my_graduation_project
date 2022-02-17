@@ -21,8 +21,22 @@
 						<van-stepper v-model="item.count"/>
 					</div>
 				</div>
-				<div class="pang-goods-price">￥<span>{{item.price | moneyFilter}}</span>元</div>
+				<div class="pang-goods-price">
+					<div>
+						￥{{item.price | moneyFilter}}
+					</div>
+					<div>
+						×{{item.count}}
+					</div>
+					<div class="all-price">
+						<span>￥{{item.price*item.count | moneyFilter}}</span>
+					</div>
+				</div>
 			</div>
+		</div>
+		<!-- 显示总价格 -->
+		<div class="total-money">
+			商品总价：￥{{totalMoney | moneyFilter}}
 		</div>
 	</div>
 </template>
@@ -41,6 +55,16 @@ export default {
 	filters:{
 		moneyFilter(money){
 			return toMoney(money);
+		}
+	},
+	computed:{
+		totalMoney(){
+			let allMoney = 0;
+			this.cartInfo.forEach((item,index) => {
+				allMoney += item.price*item.count;
+			});
+			localStorage.cartInfo = JSON.stringify(this.cartInfo);	//刷新保存数据
+			return allMoney;
 		}
 	},
 	created() {
@@ -103,7 +127,14 @@ export default {
 		flex: 6;
 		text-align: right;
 	}
-	.pang-goods-price span{
+	.all-price span{
 		color: #ff3030;
+	}
+
+	.total-money{
+		text-align: right;
+		background-color: #fff;
+		border-bottom: 1px solid #E4E7ED;
+		padding: 5px;
 	}
 </style>
