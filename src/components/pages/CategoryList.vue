@@ -37,7 +37,7 @@
 									</div>
 									<div class="list-item-text">
 										<div>{{item.NAME}}</div>
-										<div>￥{{item.ORI_PRICE}}元</div>
+										<div>￥{{item.ORI_PRICE | moneyFilter}}元</div>
 									</div>
 								</div>
 							</van-list>
@@ -53,6 +53,7 @@
 	import axios from 'axios';
 	import url from '../../serviceAPI.config';
 	import {Toast} from 'vant';
+	import {toMoney} from '../../filters/moneyFilter';
 	export default {
 		name:"CategoryList",
 		data() {
@@ -72,6 +73,11 @@
 				categorySubId:"",	//商品子类ID
 
 				errorImg:'this.src="'+ require("@/assets/images/errorimg.png")+'"',
+			}
+		},
+		filters:{
+			moneyFilter(money){
+				return toMoney(money);
 			}
 		},
 		created() {
