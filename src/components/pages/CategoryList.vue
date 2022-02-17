@@ -85,8 +85,8 @@
 		},
 		mounted() {
 			let windowHeight = document.documentElement.clientHeight;
-			document.getElementById("leftNav").style.height = windowHeight - 46 + "px";
-			document.getElementById("list-div").style.height = windowHeight - 90 + "px";	//限制list-div高度
+			document.getElementById("leftNav").style.height = windowHeight - 46 -50 + "px";
+			document.getElementById("list-div").style.height = windowHeight - 90 -50 + "px";	//限制list-div高度
 		},
 		methods: {
 			getCategory(){
