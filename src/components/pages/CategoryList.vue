@@ -140,7 +140,8 @@
 				setTimeout(() => {
 					this.isRefresh = false;
 					this.finished = false;
-					this.list = [];
+					this.goodList = [];
+					this.page = 1;	/* 初始化 */
 					this.onLoad();
 				}, 500);
 			},
