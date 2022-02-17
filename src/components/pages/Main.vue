@@ -23,7 +23,7 @@ export default {
 			nowPath:"",
 		}
 	},
-	mounted() {
+	created() {
 		this.changeTabbarActiveByPath();
 	},
 	updated() {
