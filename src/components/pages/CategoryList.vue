@@ -29,7 +29,11 @@
 							<van-list v-model="loading" :finished="finished" @load="onLoad">
 								<div class="list-item" v-for="(item, index) in goodList" :key="index">
 									<div class="list-item-image">
-										<img :src="item.IMAGE1" width="100%">
+										<img
+											:src="item.IMAGE1"
+											width="100%"
+											:onerror="errorImg"
+										>
 									</div>
 									<div class="list-item-text">
 										<div>{{item.NAME}}</div>
@@ -66,6 +70,8 @@
 				page:1,		//商品列表页数
 				goodList:[],	//商品列表信息
 				categorySubId:"",	//商品子类ID
+
+				errorImg:'this.src="'+ require("@/assets/images/errorimg.png")+'"',
 			}
 		},
 		created() {
