@@ -27,7 +27,7 @@
 		</div>
 		<div class="goods-bottom">
 			<div>
-				<van-button size="large" type="primary" :square="true">加入购物车</van-button>
+				<van-button size="large" type="primary" :square="true" @click="addGoodsToCart()">加入购物车</van-button>
 			</div>
 			<div>
 				<van-button size="large" type="danger" :square="true">直接购买</van-button>
@@ -56,7 +56,8 @@ export default {
 		}
 	},
 	created() {
-		this.goodsId = this.$route.query.goodsId;//接收参数
+		//接收参数
+		this.goodsId = this.$route.query.goodsId ? this.$route.query.goodsId : this.$route.params.goodsId ;
 		this.getInfo();
 	},
 	methods: {
@@ -81,6 +82,33 @@ export default {
 		},
 		onClickLeft(){
 			this.$router.go(-1);	//返回上一级路由
+		},
+
+		/* 增加商品至购物车 */
+		addGoodsToCart(){
+			// 取出本地购物车的商品
+			let cartInfo = localStorage.cartInfo ? JSON.parse(localStorage.cartInfo) : [] ;
+			/* 判断是否有重复商品 */
+			let isHaveGoods = cartInfo.find((cart) => {
+				return cart.goodsId === this.goodsId;
+			});
+			if (!isHaveGoods) {
+				let newGoodsInfo = {
+					goodsId:this.goodsInfo.ID,
+					Name:this.goodsInfo.NAME,
+					price:this.goodsInfo.PRESENT_PRICE,
+					image:this.goodsInfo.IMAGE1,
+					count:1	//默认买一个
+				};
+				cartInfo.push(newGoodsInfo);
+				localStorage.cartInfo = JSON.stringify(cartInfo);
+				Toast.success("添加成功");
+			}else{
+				Toast.success("已有此商品");
+			}
+
+			/* 跳转至购物车 */
+			this.$router.push({name:"Cart"});
 		}
 	},
 }

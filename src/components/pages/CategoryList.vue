@@ -27,13 +27,17 @@
 					<div id="list-div">
 						<van-pull-refresh v-model="isRefresh" @refresh="onRefresh">
 							<van-list v-model="loading" :finished="finished" @load="onLoad">
-								<div class="list-item" v-for="(item, index) in goodList" :key="index">
+								<div class="list-item" @click="goGoodsInfo(item.ID)" v-for="(item, index) in goodList" :key="index">
 									<div class="list-item-image">
-										<img :src="item.IMAGE1" width="100%">
+										<img
+											:src="item.IMAGE1"
+											width="100%"
+											:onerror="errorImg"
+										>
 									</div>
 									<div class="list-item-text">
 										<div>{{item.NAME}}</div>
-										<div>￥{{item.ORI_PRICE}}元</div>
+										<div>￥{{item.ORI_PRICE | moneyFilter}}元</div>
 									</div>
 								</div>
 							</van-list>
@@ -49,6 +53,7 @@
 	import axios from 'axios';
 	import url from '../../serviceAPI.config';
 	import {Toast} from 'vant';
+	import {toMoney} from '../../filters/moneyFilter';
 	export default {
 		name:"CategoryList",
 		data() {
@@ -66,6 +71,13 @@
 				page:1,		//商品列表页数
 				goodList:[],	//商品列表信息
 				categorySubId:"",	//商品子类ID
+
+				errorImg:'this.src="'+ require("@/assets/images/errorimg.png")+'"',
+			}
+		},
+		filters:{
+			moneyFilter(money){
+				return toMoney(money);
 			}
 		},
 		created() {
@@ -73,8 +85,8 @@
 		},
 		mounted() {
 			let windowHeight = document.documentElement.clientHeight;
-			document.getElementById("leftNav").style.height = windowHeight - 46 + "px";
-			document.getElementById("list-div").style.height = windowHeight - 90 + "px";	//限制list-div高度
+			document.getElementById("leftNav").style.height = windowHeight - 46 -50 + "px";
+			document.getElementById("list-div").style.height = windowHeight - 90 -50 + "px";	//限制list-div高度
 		},
 		methods: {
 			getCategory(){
@@ -140,7 +152,8 @@
 				setTimeout(() => {
 					this.isRefresh = false;
 					this.finished = false;
-					this.list = [];
+					this.goodList = [];
+					this.page = 1;	/* 初始化 */
 					this.onLoad();
 				}, 500);
 			},
@@ -179,7 +192,13 @@
 				this.finished = false;
 				this.page = 1;
 				this.onLoad();
+			},
+
+			/* 跳转到商品详细页 */
+			goGoodsInfo(id){
+				this.$router.push({name:"Goods",params:{goodsId:id}});
 			}
+
 		},
 	};
 </script>
