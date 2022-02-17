@@ -53,8 +53,11 @@ export default {
 			this.nowPath = this.$route.path;	/* 获得当前路径 */
 			if (this.nowPath === "/Cart") {
 				this.active = 2;
+			}else if (this.nowPath === "/CategoryList") {
+				this.active = 1;
+			}else if (this.nowPath === "/") {
+				this.active = 0;
 			}
-
 		},
 	},
 }
