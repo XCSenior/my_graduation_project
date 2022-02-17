@@ -5,6 +5,7 @@ import Register from '../components/pages/Register';
 import Login from '../components/pages/Login';
 import Goods from '../components/pages/Goods.vue';
 import CategoryList from '../components/pages/CategoryList.vue';
+import Cart from '../components/pages/Cart.vue';
 
 Vue.use(VueRouter)
 
@@ -15,5 +16,6 @@ export default new VueRouter({
 		{ path:"/login", name:"Login", component:Login},
 		{ path:"/goods", name:"Goods", component:Goods},
 		{ path:"/CategoryList", name:"CategoryList", component:CategoryList},
+		{ path:"/Cart", name:"Cart", component:Cart},
 	]
 })
