@@ -27,3 +27,10 @@ npm install
 npm run serve
 ```
 
+### 展示图预览
+
+![pic1](https://github.com/XCSenior/my_graduation_project/blob/master/ProjectImg/%E6%AF%95%E8%AE%BE%20(1).png?raw=true)
+
+![pic2](https://github.com/XCSenior/my_graduation_project/blob/master/ProjectImg/%E6%AF%95%E8%AE%BE%20(2).png?raw=true)
+
+![pic3](https://github.com/XCSenior/my_graduation_project/blob/master/ProjectImg/%E6%AF%95%E8%AE%BE%20(3).png?raw=true)
