@@ -73,7 +73,7 @@ export default {
 					console.log("我是this.goodsInfo",this.goodsInfo);
 				}else{
 					console.log(response.data);
-					Toast.fail("数据获取失败");
+					Toast.fail("服务器错误，数据获取失败");
 				}
 			}).catch((err) => {
 				console.log("我是getInfo()err",err);
