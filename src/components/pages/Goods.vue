@@ -56,7 +56,7 @@ export default {
 		}
 	},
 	created() {
-		//接收参数
+		//接收点击商品传过来的参数
 		this.goodsId = this.$route.query.goodsId ? this.$route.query.goodsId : this.$route.params.goodsId ;
 		this.getInfo();
 	},
@@ -65,7 +65,7 @@ export default {
 			axios({
 				url:url.getDetailGoodsInfo,
 				method:"post",
-				data:{goodsId:this.goodsId}
+				data:{	goodsId:this.goodsId	}
 			}).then((response) => {
 				// console.log("我是getInfo()response",response);
 				if(response.data.code === 200 && response.data.message){
@@ -84,7 +84,7 @@ export default {
 			this.$router.go(-1);	//返回上一级路由
 		},
 
-		/* 增加商品至购物车 */
+		/* 增加商品至购物车方法 */
 		addGoodsToCart(){
 			// 取出本地购物车的商品
 			let cartInfo = localStorage.cartInfo ? JSON.parse(localStorage.cartInfo) : [] ;
