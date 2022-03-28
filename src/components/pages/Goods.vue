@@ -1,6 +1,6 @@
 <template>
 	<div>
-		<div class="naavar-div">
+		<div class="nav-div">
 			<van-nav-bar
 				title="商品详情"
 				left-text="返回"
