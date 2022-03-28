@@ -28,11 +28,28 @@
 			</van-tabs>
 		</div>
 		<div class="goods-bottom">
+			<div class="goods-bottom-other">
+				<div>
+					<img src="../../assets/images/kids lock.png" alt="store.png">
+					<br>
+					<span>&nbsp;店铺</span>
+				</div>
+				<div>
+					<img src="../../assets/images/calling robort.png" alt="call.png">
+					<br>
+					<span>&nbsp;客服</span>
+				</div>
+				<div @click="goToCart()">
+					<img src="../../assets/images/cart.png" alt="cart.png">
+					<br>
+					<span>&nbsp;购车</span>
+				</div>
+			</div>
 			<div>
 				<van-button size="large" type="primary" :square="true" @click="addGoodsToCart()">加入购物车</van-button>
 			</div>
 			<div>
-				<van-button size="large" type="danger" :square="true">直接购买</van-button>
+				<van-button size="large" type="danger" :square="true">立即购买</van-button>
 			</div>
 		</div>
 	</div>
@@ -110,6 +127,10 @@ export default {
 			}
 
 			/* 跳转至购物车 */
+			// this.$router.push({name:"Cart"});
+		},
+		goToCart(){
+			/* 跳转至购物车 */
 			this.$router.push({name:"Cart"});
 		}
 	},
@@ -151,5 +172,25 @@ export default {
 	.goods-bottom > div{
 		flex:1;
 		padding: 5px;
+	}
+
+	.goods-bottom-other{
+		font-size: 0.1rem;
+		width: 100%;
+		display: flex;
+		flex-direction: row;
+		flex-wrap: nowrap;
+	}
+	.goods-bottom-other span{
+		font-size: 8px;
+		transform: scale(0.5);	/* 显示小于12px字体,但貌似Chrome不支持显示 */
+	}
+	.goods-bottom-other > div{
+		flex:1;
+		padding-left: 4px;
+	}
+	.goods-bottom-other > div img{
+		height: 30px;
+		width: 30px;
 	}
 </style>
