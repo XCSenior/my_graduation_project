@@ -11,8 +11,10 @@
 		<div class="topImage-div">
 			<img :src="goodsInfo.IMAGE1" width="100%" alt="goods.IMAGE1">
 		</div>
+		<div class="goods-price">
+			<span class="goods-price-yuan">￥</span><span class="goods-price-price">{{goodsInfo.PRESENT_PRICE | moneyFilter}}</span>
+		</div>
 		<div class="goods-name">{{goodsInfo.NAME}}</div>
-		<div class="goods-price">价格：￥{{goodsInfo.PRESENT_PRICE | moneyFilter}}元</div>
 		<div>
 			<van-tabs swipeable sticky>	<!-- 可以滑动切换 增加吸顶效果 -->
 				<van-tab title="商品详情">
@@ -118,11 +120,23 @@ export default {
 	.detail{
 		font-size: 0px;	/* 去除图片间的空格 */
 	}
-	.goods-name{
-		background-color: red;
-	}
 	.goods-price{
-		background-color: red;
+		color: rgb(243, 64, 64);
+		font-size: 0;
+		font-weight: bold;
+		background-color: white;
+	}
+	.goods-price .goods-price-yuan{
+		font-size: 1.2rem;
+		font-weight: normal;
+	}
+	.goods-price .goods-price-price{
+		font-size: 1.6rem;
+		font-weight: bold;
+	}
+	.goods-name{
+		font-size: 1rem;
+		background-color: white;
 	}
 	.goods-bottom{
 		position: fixed;
