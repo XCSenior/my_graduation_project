@@ -7,8 +7,8 @@
            <img src="https://avatars.githubusercontent.com/u/77381715?v=4" class="top-img" />
         </div>
         <div class="login">
-            <div><van-button type="warning">我要登录</van-button></div>
-            <div><van-button type="primary">我要注册</van-button></div>
+            <div><van-button type="warning" @click="goToLogin()">我要登录</van-button></div>
+            <div><van-button type="primary" @click="goToRegister()">我要注册</van-button></div>
         </div>
         <div>
             <van-cell-group>
@@ -26,7 +26,15 @@
 
 <script>
     export default {
-		
+		name:"Member",
+		methods: {
+			goToLogin(){
+				this.$router.push({name:"Login"});
+			},
+			goToRegister(){
+				this.$router.push({name:"Register"});
+			}
+		},
     }
 </script>
 
