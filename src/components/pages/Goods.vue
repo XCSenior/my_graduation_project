@@ -6,6 +6,7 @@
 				left-text="返回"
 				left-arrow
 				@click-left="onClickLeft"
+				fixed
 			/>
 		</div>
 		<div class="topImage-div">
