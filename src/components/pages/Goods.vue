@@ -17,7 +17,7 @@
 		</div>
 		<div class="goods-name">{{goodsInfo.NAME}}</div>
 		<div>
-			<van-tabs swipeable sticky>	<!-- 可以滑动切换 增加吸顶效果 -->
+			<van-tabs swipeable sticky :offset-top="44">	<!-- 可以滑动切换 增加吸顶效果 -->
 				<van-tab title="商品详情">
 					<div class="detail" v-html="goodsInfo.DETAIL">
 
