@@ -43,7 +43,7 @@ export default {
 					this.$router.push({name:"Cart"})
 					break;
 				case 3:
-					console.log("跳转到会员中心");
+					this.$router.push({name:"Member"});
 					break;
 				default:
 					break;
@@ -57,6 +57,8 @@ export default {
 				this.active = 1;
 			}else if (this.nowPath === "/") {
 				this.active = 0;
+			}else if(this.nowPath === "/Member"){
+				this.active = 3
 			}
 		},
 	},

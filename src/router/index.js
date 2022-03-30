@@ -7,6 +7,7 @@ import Goods from '../components/pages/Goods.vue';
 import CategoryList from '../components/pages/CategoryList.vue';
 import Cart from '../components/pages/Cart.vue';
 import Main from '../components/pages/Main.vue';
+import Member from '../components/pages/Member.vue';
 
 Vue.use(VueRouter)
 
@@ -18,6 +19,7 @@ export default new VueRouter({
 				{	path:"/", name:"ShoppingMall", component:ShoppingMall},
 				{	path:"/CategoryList", name:"CategoryList", component:CategoryList},
 				{	path:"/Cart", name:"Cart", component:Cart},
+				{	path:"/Member", name:"Member", component:Member},
 			]
 		},
 		{	path:"/register", name:"Register", component:Register},
