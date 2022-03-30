@@ -31,7 +31,7 @@
 		<div class="goods-bottom">
 			<div class="goods-bottom-other">
 				<div>
-					<img src="../../assets/images/kids lock.png" alt="store.png">
+					<img src="../../assets/images/kids_lock.png" alt="store.png">
 					<br>
 					<span>&nbsp;店铺</span>
 				</div>
