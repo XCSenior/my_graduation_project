@@ -30,4 +30,4 @@ app.get("/index",(request,response)=>{
 
 app.listen(4000,() => {
 	console.log("服务已启动,4000端口监听中");
-})
+});
